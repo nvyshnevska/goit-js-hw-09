@@ -53,6 +53,10 @@ class Timer {
   start() {
     this.intervalId = setInterval(() => {
       const timeLeft = this.targetDate.getTime() - Date.now();
+      if (timeLeft <= 0) {
+        clearInterval(this.intervalId);
+        return;
+      }
       const timeLeftConverted = this.convertMs(timeLeft);
       this.onTick(timeLeftConverted);
     }, 1000);
